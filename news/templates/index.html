@@ -1,2 +1,13 @@
-<h1>Strona testowa</h1>
-{{ zmienna }}
+<html>
+    <head>
+        <title>AIiR - PovRay</title>
+    </head>
+    <body>
+        <h1>Moja Strona </h1>
+        {% for entry in news %}
+            <h3>{{ entry.title }}</h3>
+            {{ entry.text|safe }}<br />
+            {{ entry.posted_date|date:"Y.m.d H:i" }}
+        {% endfor  %}
+    </body>
+</html>

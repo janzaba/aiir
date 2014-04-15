@@ -6,6 +6,7 @@ from POVRay.news.models import *
 
 
 def index(request):
+    news = News.objects.all().order_by('-posted_date')
     return render_to_response('index.html',
-            {'zmienna': 'Jestem widokiem'},
+            {'news': news},
             context_instance=RequestContext(request))

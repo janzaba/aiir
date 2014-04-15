@@ -15,5 +15,5 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     #  url(r'^admin/(.*), admin.site.root),
-    url(r'^/?$', 'POVRay.news.views.index'),
+    url(r'^/?$', 'POVRay.app.views.index'),
 )

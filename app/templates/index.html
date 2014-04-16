@@ -1,244 +1,78 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>PovRayRenders</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
-<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/imgeffect.css" />
-<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-<!-- start gallery Script -->
-	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.mixitup.min.js"></script>
-				<script type="text/javascript">
-				$(function () {
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PovRayRenders</title>
 
-					var filterList = {
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">
 
-						init: function () {
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
 
-							// MixItUp plugin
-							// http://mixitup.io
-							$('#portfoliolist').mixitup({
-								targetSelector: '.portfolio',
-								filterSelector: '.filter',
-								effects: ['fade'],
-								easing: 'snap',
-								// call the hover effect
-								onMixEnd: filterList.hoverEffect()
-							});
-
-						},
-
-						hoverEffect: function () {
-
-							// Simple parallax effect
-							$('#portfoliolist .portfolio').hover(
-								function () {
-									$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
-									$(this).find('img').stop().animate({top: 0}, 500, 'easeOutQuad');
-								},
-								function () {
-									$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeInQuad');
-									$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');
-								}
-							);
-
-						}
-
-					};
-
-					// Run the show!
-					filterList.init();
-
-
-				});
-				</script>
-				<!-- Add fancyBox main JS and CSS files -->
-				<script src="{{ STATIC_URL }}js/jquery.magnific-popup.js" type="text/javascript"></script>
-				<link href="{{ STATIC_URL }}css/magnific-popup.css" rel="stylesheet" type="text/css">
-						<script>
-							$(document).ready(function() {
-								$('.popup-with-zoom-anim').magnificPopup({
-									type: 'inline',
-									fixedContentPos: false,
-									fixedBgPos: true,
-									overflowY: 'auto',
-									closeBtnInside: true,
-									preloader: false,
-									midClick: true,
-									removalDelay: 300,
-									mainClass: 'my-mfp-zoom-in'
-							});
-						});
-						</script>
-				<script type="text/javascript" src="{{ STATIC_URL }}js/move-top.js"></script>
-				<script type="text/javascript" src="{{ STATIC_URL }}js/easing.js"></script>
-				<!----end gallery----------->
-
-		   	<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					$(".scroll").click(function(event){
-						event.preventDefault();
-						$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-					});
-				});
-			</script>
-</head>
-
-<body>
-		<!----start-header----------->
-				<div class="header_bg">
-					<div class="wrap">
-						<div class="header">
-							<!--------start-logo------>
-							<div class="logo">
-								<a href="/">PovRayRenders</a>
-							</div>
-							<!--------end-logo--------->
-							<!----start-nav-------->
-							<div class="nav">
-								<ul>
-								   <li><a href="#home" class="scroll">Home</a></li>
-								   <li class="active"><a href="#rejestracja" class="scroll">Rejestracja</a></li>
-								   <!--<li><a href="#about" class="scroll">About</a></li>
-								   <li><a href="#contact" class="scroll">Contact</a></li>-->
-								 <div class="clear"> </div>
-								 </ul>
-							</div>
-							<!-----end-nav-------->
-							<div class="clear"> </div>
-						</div>
-					</div>
-				</div>
-		<!------end-header------------>
-<!--start rejestracja------>
-<div class="contact" id="rejestracja">
-    <div class="wrap">
-        	<h2>Rejestracja</h2>
-		<h4>Zarejestruj się aby korzystać ze strony</h4>
-		<br />
-		<div class="section group">
-
-				  <div class="contact-form">
-				  	  <form method="post" action="#">
-
-
-						    	Email: <input type="text" class="textbox" label="Email">
-						    	<input type="password" class="textbox" label="Hasło">
-						    	<div class="clear"> </div>
-
-						    <div>
-						    	<textarea value="Your Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Message';}">Your Message...</textarea>
-						    </div>
-						  <span><input type="submit" class="" value="Submit"></span>
-						  <div class="clear"></div>
-					    </form>
-				  </div>
-
-
-				 <div class="clear"></div>
-			  </div>
-			  </div>
-     	</div>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">PovRayRenders</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
-</div>
+
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Sticky footer with fixed navbar</h1>
+      </div>
+      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>
+      <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </div>
 
 
-
-<div class="contact" id="contact">
-	<div class="wrap">
-		<h2>Contact Us</h2>
-		<h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h4>
-		<div class="section group">
-			  <div class="col span_2_of_3">
-				  <div class="contact-form">
-				  	  <form method="post" action="#">
-
-					    		<input type="text" class="textbox" value="Your Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your  Name';}">
-						    	<input type="text" class="textbox" value="Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Email';}">
-						    	<div class="clear"> </div>
-
-						    <div>
-						    	<textarea value="Your Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Message';}">Your Message...</textarea>
-						    </div>
-						  <span><input type="submit" class="" value="Submit"></span>
-						  <div class="clear"></div>
-					    </form>
-				  </div>
-  				</div>
-				<div class="col span_1_of_3">
-					<div class="company_address">
-				     	<h5>INFORMATION</h5>
-						<ul class="list3">
-							<li>
-								<img src="{{ STATIC_URL }}img/location.png" alt=""/>
-								<div class="extra-wrap">
-								  <p>Lorem ipsum  consectetu</p>
-								  <p>12345-Lorem ipsum  consectetu</p>
-								  <p>Lorem ipsum , consectetu</p>
-								</div>
-								<div class="clear"> </div>
-							</li>
-
-							<li>
-								<img src="{{ STATIC_URL }}img/phone.png" alt=""/>
-								<div class="extra-wrap">
-									<p>+1 800(Phone) 258 2598</p>
-								</div>
-								<div class="clear"> </div>
-							</li>
-							<li>
-								<img src="{{ STATIC_URL }}img/fax2.png" alt=""/>
-								<div class="extra-wrap">
-									<p>+1 500(Tax) 6343 8690</p>
-								</div>
-								<div class="clear"> </div>
-							</li>
-							<li>
-								<img src="{{ STATIC_URL }}img/mail.png" alt=""/>
-								<div class="extra-wrap">
-									<p> <a href="mailto:info@mycompany.com"> info(at)appstore.com</a></p>
-								</div>
-								<div class="clear"> </div>
-							</li>
-						</ul>
-				   </div>
-				 </div>
-				 <div class="clear"></div>
-			  </div>
-			  </div>
-     	</div>
-     <div class="footer-bottom">
-     	<div class="wrap">
-        <div class="copy">
-		    <p class="copy">&#169 2014 Template by  <a href="http://w3layouts.com" target="_blank">w3layouts</a> </p>
-		</div>
-		<script type="text/javascript">
-							$(document).ready(function() {
-
-								var defaults = {
-						  			containerID: 'toTop', // fading element id
-									containerHoverID: 'toTopHover', // fading element hover id
-									scrollSpeed: 1200,
-									easingType: 'linear'
-						 		};
-
-
-								$().UItoTop({ easingType: 'easeOutQuart' });
-
-							});
-						</script>
-		 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"> </span></a>
-		 <script src="{{ STATIC_URL }}js/jquery.scrollTo.js"></script>
-		</div>
-	</div>
-</body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+  </body>
 </html>

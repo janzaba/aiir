@@ -12,9 +12,11 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
+    url(r'^/?$', 'POVRay.views.index', name='home'),
+    url(r'^register/?$', 'POVRay.views.register', name='register'),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     #  url(r'^admin/(.*), admin.site.root),
-    url(r'^/?$', 'POVRay.app.views.index'),
-    url(r'^register/?$', 'POVRay.app.views.register'),
+
 )

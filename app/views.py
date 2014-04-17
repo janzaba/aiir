@@ -10,7 +10,12 @@ class RegisterForm(forms.Form):
     re_password = forms.CharField(max_length=150,widget=forms.PasswordInput(),label="Powtórz hasło")
 
 def index(request):
-    f = RegisterForm()
     return render_to_response('index.html',
+            {},
+            context_instance=RequestContext(request))
+
+def register(request):
+    f = RegisterForm()
+    return render_to_response('register.html',
             {'f': f.as_p()},
             context_instance=RequestContext(request))

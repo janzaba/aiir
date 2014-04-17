@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PovRayRenders</title>
+    <title>PovRayRenders {% block title %}{% endblock %}</title>
 
     <!-- Bootstrap -->
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
@@ -56,67 +56,11 @@
     <!-- Begin page content -->
     <div class="container">
       <div class="page-header">
-        <h1>PovRayRenders</h1>
+        <h1>{% block h1 %}PovRayRenders{% endblock %}</h1>
       </div>
+        {% block content %}
 
-      <!-- {{ f }} -->
-
-      <br />
-      <br />
-        <form class="form-horizontal">
-        <fieldset>
-
-        <!-- Form Name -->
-        <legend>Rejestracja</legend>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="name">Imię i nazwisko</label>
-          <div class="col-md-4">
-          <input id="name" name="name" class="form-control input-md" required="" type="text">
-          <span class="help-block">Imię i nazwisko / Nick / Nazwa konta</span>
-          </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="email">Email</label>
-          <div class="col-md-4">
-          <input id="email" name="email" placeholder="@email" class="form-control input-md" required="" type="text">
-
-          </div>
-        </div>
-
-        <!-- Password input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="password">Hasło</label>
-          <div class="col-md-4">
-            <input id="password" name="password" placeholder="" class="form-control input-md" required="" type="password">
-
-          </div>
-        </div>
-
-        <!-- Password input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="re_password">Powtórz hasło</label>
-          <div class="col-md-4">
-            <input id="re_password" name="re_password" placeholder="" class="form-control input-md" required="" type="password">
-
-          </div>
-        </div>
-
-        <!-- Button -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="submit"></label>
-          <div class="col-md-4">
-            <button id="submit" name="submit" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> Zarejestruj się</button>
-          </div>
-        </div>
-
-        </fieldset>
-        </form>
-    </div>
-
+        {% endblock %}
     <div id="footer">
       <div class="container">
         <p class="text-muted">PovRayRenders by <a>@pawel.lorenc</a>, <a>@patryk.pham.quoc</a>, <a>@michal.mynarski</a>, <a>@jan.zaba</a></p>

@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     #  url(r'^admin/(.*), admin.site.root),
     url(r'^/?$', 'POVRay.app.views.index'),
+    url(r'^register/?$', 'POVRay.app.views.register'),
 )

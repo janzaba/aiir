@@ -13,5 +13,5 @@ class RegisterForm(forms.Form):
 def register(request):
     f = RegisterForm()
     return render_to_response('register.html',
-            {'f': f.as_p()},
+            {'f': f.as_p(), 'menu':'register'},
             context_instance=RequestContext(request))

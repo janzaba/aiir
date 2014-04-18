@@ -11,9 +11,19 @@
                         {% csrf_token %}
                         {{ form.media }}
                         {% if form.errors %}
-                            <div class="alert alert-error">
+                            <div class="alert alert-danger">
                                 <ul>
-                                    {% for error in form.non_field_errors %}
+                                    {% for error in form.errors %}
+                                        <li>Niepoprawne pole: {{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <!-- Custom errors -->
+                        {% if formErrors %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for error in formErrors %}
                                         <li>{{ error }}</li>
                                     {% endfor %}
                                 </ul>

@@ -40,7 +40,15 @@
 
           </ul>
           <ul class="nav navbar-nav navbar-right">
-                {% if user.username %}
+                {% if user.is_authenticated %}
+                    <li style="padding-top: 15px;padding-bottom: 15px;line-height: 20px;">
+                        Witaj,
+                        {% if user.first_name %}
+                            {{ user.first_name }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                    </li>
                     <li><a href="{% url logout %}">Wyloguj</a></li>
                 {% else %}
                     <li {% ifequal menu 'register' %}class="active"{% endifequal %}>

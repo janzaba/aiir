@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from django import forms
 
@@ -69,3 +69,8 @@ def loginPage(request):
         return render_to_response('login.html',
             {'form': f, 'menu':'login','user':request.user},
             context_instance=RequestContext(request))
+
+################################  LOGOUT ###################################################################################################################################
+def logoutPage(request):
+    logout(request)
+    return HttpResponseRedirect('/')

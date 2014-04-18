@@ -2,9 +2,9 @@
 {% block title %} - rejestracja {% endblock %}
 
 {% block h1 %}PovRayRenders - rejestracja{% endblock %}
-{% block beforeform %}
-    <form class="form-horizontal" action="" method="POST" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
-{% endblock beforeform %}
-{% block afterform %}
-    </form>
-{% endblock afterform %}
+
+{% block formtitle %}Podaj dane konta{% endblock formtitle %}
+
+{% block submit %}
+    <span class="glyphicon glyphicon-user"></span> Zarejestruj się
+{% endblock submit %}

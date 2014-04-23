@@ -1,0 +1,12 @@
+{% extends "formTemplate.html" %}
+{% block title %} Register Today {% endblock %}
+
+{% block formtitle %}Podaj dane konta{% endblock formtitle %}
+{% block beforeform %}<div class="jumbotron">
+            <h1>Register Today <p><small>or if You have already account </small></h1></p>
+            <p><a href="{% url login %}" class="btn btn-success btn-lg">Get me to the Log-In Page</a></p>
+        </div>
+        {% endblock beforeform %}
+{% block submit %}
+    <span class="glyphicon glyphicon-user"></span> Register
+{% endblock submit %}

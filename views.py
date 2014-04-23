@@ -21,34 +21,37 @@ class LoginForm(forms.Form):
 
 ################################  HOME ###################################################################################################################################
 def index(request):
-        return render_to_response('index.html',{'menu':'home'},context_instance=RequestContext(request))
+        return render_to_response('register2.html',{'menu':'home'},context_instance=RequestContext(request))
 
 ################################  REGISTER ###################################################################################################################################
 def register(request):
-    formErrors = []
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            if form.cleaned_data['password'] == form.cleaned_data['re_password']:                   #czy wpisane hasła są takie same
-                try:
-                    user = User.objects.create_user(form.cleaned_data['email'], form.cleaned_data['email'], form.cleaned_data['password'])
-                    user.first_name = form.cleaned_data['name']
-                    user.is_staff = False
-                    user.save()
-                    return HttpResponseRedirect('/login')
-                except Exception as e:
-                    formErrors.append("Podany adres email istnieje już w naszej bazie danych");
-                    formErrors.append(e);
+    if not request.user.is_authenticated():
+        formErrors = []
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                if form.cleaned_data['password'] == form.cleaned_data['re_password']:                   #czy wpisane hasła są takie same
+                    try:
+                        user = User.objects.create_user(form.cleaned_data['email'], form.cleaned_data['email'], form.cleaned_data['password'])
+                        user.first_name = form.cleaned_data['name']
+                        user.is_staff = False
+                        user.save()
+                        return HttpResponseRedirect('/login')
+                    except Exception as e:
+                        formErrors.append("Podany adres email istnieje już w naszej bazie danych");
+                        formErrors.append(e);
+                        return render_to_response('register.html',{'form': form, 'menu':'login', 'formErrors':formErrors},context_instance=RequestContext(request))
+                else:
+                    formErrors.append("Wpisane hasła różnią się od siebie");
                     return render_to_response('register.html',{'form': form, 'menu':'login', 'formErrors':formErrors},context_instance=RequestContext(request))
-            else:
-                formErrors.append("Wpisane hasła różnią się od siebie");
-                return render_to_response('register.html',{'form': form, 'menu':'login', 'formErrors':formErrors},context_instance=RequestContext(request))
 
+            else:
+                return render_to_response('register.html',{'form': form, 'menu':'login'},context_instance=RequestContext(request))
         else:
-            return render_to_response('register.html',{'form': form, 'menu':'login'},context_instance=RequestContext(request))
+            f = RegisterForm()
+            return render_to_response('register2.html',{'form': f, 'menu':'register'},context_instance=RequestContext(request))
     else:
-        f = RegisterForm()
-        return render_to_response('register.html',{'form': f, 'menu':'register'},context_instance=RequestContext(request))
+            return render_to_response('main.html',{},context_instance=RequestContext(request))
 
 ################################  LOGIN ###################################################################################################################################
 def loginPage(request):

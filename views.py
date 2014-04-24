@@ -21,7 +21,11 @@ class LoginForm(forms.Form):
 
 ################################  HOME ###################################################################################################################################
 def index(request):
-        return render_to_response('register2.html',{'menu':'home'},context_instance=RequestContext(request))
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/register')
+    else:
+        #return render_to_response('main.html',{},context_instance=RequestContext(request))
+        return HttpResponseRedirect('/render')
 
 ################################  REGISTER ###################################################################################################################################
 def register(request):
@@ -51,7 +55,7 @@ def register(request):
             f = RegisterForm()
             return render_to_response('register2.html',{'form': f, 'menu':'register'},context_instance=RequestContext(request))
     else:
-            return render_to_response('main.html',{},context_instance=RequestContext(request))
+            return HttpResponseRedirect('/')
 
 ################################  LOGIN ###################################################################################################################################
 def loginPage(request):

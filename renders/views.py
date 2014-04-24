@@ -15,3 +15,9 @@ def render(request):
         else:
             #nie przesłano formularza
             return render_to_response('create.html',{},context_instance=RequestContext(request))
+
+def my_renders(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/register')
+    else:
+        return render_to_response('my_renders.html',{},context_instance=RequestContext(request))

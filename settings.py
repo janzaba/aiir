@@ -124,7 +124,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'POVRay',
-    'POVRay.renders',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -16,58 +16,117 @@
     </style>
 
     <div class="jumbotron">
-            <h1>Poprawnie Zalogowano! <p><small>Rendering still in progress </small></h1></p>
-            <a href="{% url logout %}">Wyloguj</a>
+        <nav role="navigation" class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand">AiirPovRay</a>
+            </div>
+    <!-- Collection of nav links and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+             <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Create Render</a></li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">About Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url logout %}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+            <h1><small>Welcome in AiirPoveRey, an web renders generator!</small></h1></p>
+            <p></p>
+            <p>Paste your PovRey code into window below and hit "Submit Code" button. Your render will be generated in seconds!</p>
+            <p></p>
+            <p></p>
+            <p><small>Your earlier Renders</small></p>
+            <table class="table table-striped" id="renders">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Render Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
     </div>
     <div id="editor-container">
-        <div id="editor">//EXAMPLE OF SPHERE
+        <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 77%;">
+                <span class="sr-only">77% Complete</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Render name:</label>
+            <div class="">
+                <input type="text" name="name" id="render-name" placeholder="render-name" class="form-control input-md" />
+            </div>
+        </div>
+        <br />
+        <div id="editor">#include "colors.inc"
 
-//Files with predefined colors and textures
-#include "colors.inc"
-#include "glass.inc"
-#include "golds.inc"
-#include "metals.inc"
-#include "stones.inc"
-#include "woods.inc"
+background { color Cyan }
 
-//Place the camera
 camera {
-  sky <0,0,1>           //Don't change this
-  direction <-1,0,0>    //Don't change this
-  right <-4/3,0,0>      //Don't change this
-  location <30,10,1.5> //Camera location
-  look_at <0,0,0>     //Where camera is pointing
-  angle 15      //Angle of the view--increase to see more, decrease to see less
+  location <0, 2, -3>
+  look_at <0, 1, 2>
 }
 
-//Ambient light to "brighten up" darker pictures
-global_settings { ambient_light White }
-
-//Place a light--you can have more than one!
-light_source {
-  <10,-10,20>   //Change this if you want to put the light at a different point
-  color White*2         //Multiplying by 2 doubles the brightness
+sphere {
+  <0, 1, 2>, 2
+  texture {
+    pigment { color Yellow }
+  }
 }
 
-//Set a background color
-background { color White }
-
-//Create a "floor"
-plane {
-  <0,0,1>, 0            //This represents the plane 0x+0y+z=0
-  texture { T_Silver_3A }       //The texture comes from the file "metals.inc"
-}
-
-//Sphere with specified center point and radius
-//The texture comes from the file "stones.inc"
-sphere { <0,0,1.5>, 1 texture {T_Stone1} }
-</div>
+light_source { <2, 4, -3> color White}
+        </div>
+        <p></p>
+            <div class="col-xs-offset-0 col-xs-0">
+                <button type="submit" class="btn btn-primary" id="submit">Submit Code</button>
     </div>
+    <div id="ret"></div>
 
     <script src="{{ STATIC_URL }}js/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}js/scripts.js" type="text/javascript" charset="utf-8"></script>
     <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/mono_industrial");
         editor.getSession().setMode("ace/mode/c_cpp");
+
+        $(document).ready(function(){
+                getRenders("{% url ajax "select" %}");
+                $("button#submit").click(function(e){
+                   $.ajax({
+                        url: 'http://aiir.pythonanywhere.com{% url ajax "create" %}/',
+                        type: "POST",
+                        data: {name: $('#render-name').val(), script: editor.getValue()},
+                        dataType:'json',
+                        success: function(data){
+                            if (data.result == "success")
+                               alert("Render has been created");
+                            else
+                                alert("Error occurred while processing");
+                            $('#renders tbody').html('');
+                            getRenders("{% url ajax "select" %}");
+                        },
+                        error: function(e){
+                            alert("failure: " + e.status);
+                            $('#ret').html(e.responseText);
+                        }
+
+                    });
+
+                });
+            });
     </script>
+
 {% endblock content %}

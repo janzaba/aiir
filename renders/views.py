@@ -2,6 +2,9 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+# from bson import json_util
 
 import json
 
@@ -18,17 +21,19 @@ def my_renders(request):
         return HttpResponseRedirect('/register')
     else:
         return render_to_response('my_renders.html',{},context_instance=RequestContext(request))
+
+@csrf_exempt
 def ajax(request, action):
+
     response = {}
     response['result'] = 'failed'
     if not request.user.is_authenticated():
         response['message'] = 'brak zalogowanego użytkownika'
-        return render_to_response('ajax.html',{'response':json.dumps(response)},context_instance=RequestContext(request))
     else:
         if action == "create":
             #dodanie renderu do bazy danych
             if request.method == 'POST':
-                r = Renders(user=request.user,script=request.POST['script'])
+                r = Renders(user=request.user,script=request.POST['script'],name=request.POST['name'])
                 r.save()
                 if r.id:
                     response['result'] = 'success'
@@ -36,6 +41,15 @@ def ajax(request, action):
                     response['message'] = 'błąd dodania renderu do bazy danych'
             else:
                 response['message'] = 'brak danych'
+        elif action == "select":
+            r = Renders.objects.filter(user = request.user)
+            response = []
+            for render in r:
+                tmp = {}
+                tmp['name'] = render.name
+                tmp['start_date'] = str( render.start_date )
+                tmp['end_date'] = str( render.end_date )
+                response.append(tmp)
         else:
             response['message'] = 'nie rozpoznano akcji'
-        return render_to_response('ajax.html',{'response':json.dumps(response)},context_instance=RequestContext(request))
+    return HttpResponse(json.dumps(response), mimetype="application/json")

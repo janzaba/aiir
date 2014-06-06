@@ -30,8 +30,8 @@
             <div id="navbarCollapse" class="collapse navbar-collapse">
              <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Create Render</a></li>
-                    <li><a href="#">Account</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="{% url account %}">Account</a></li>
+                   <!-- <li><a href="#">About Us</a></li> -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url logout %}">Logout</a></li>
@@ -39,7 +39,7 @@
         </div>
     </nav>
 
-            <h1><small>Welcome in AiirPoveRey, an web renders generator!</small></h1></p>
+            <h1><small>Welcome in AiirPovRey, an web renders generator!</small></h1></p>
             <p></p>
             <p>Paste your PovRey code into window below and hit "Submit Code" button. Your render will be generated in seconds!</p>
             <p></p>
@@ -51,7 +51,7 @@
                         <th>No.</th>
                         <th>Render Name</th>
                         <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,11 +59,11 @@
             </table>
     </div>
     <div id="editor-container">
-        <div class="progress progress-striped active">
+        <!--<div class="progress progress-striped active">
             <div class="progress-bar" style="width: 77%;">
                 <span class="sr-only">77% Complete</span>
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <label class="control-label">Render name:</label>
             <div class="">
@@ -102,8 +102,18 @@ light_source { <2, 4, -3> color White}
         editor.setTheme("ace/theme/mono_industrial");
         editor.getSession().setMode("ace/mode/c_cpp");
 
+
+        function refresh(){
+            refreshRenders("{% url ajax "refresh" %}")
+            $('#renders tbody').html("");
+            getRenders("{% url ajax "select" %}", "{{ STATIC_URL }}users/{{ user.id }}");
+        }
+
         $(document).ready(function(){
-                getRenders("{% url ajax "select" %}");
+                getRenders("{% url ajax "select" %}", "{{ STATIC_URL }}users/{{ user.id }}");
+                setInterval(function(){
+                    refresh();
+                }, 5000);
                 $("button#submit").click(function(e){
                    $.ajax({
                         url: 'http://aiir.pythonanywhere.com{% url ajax "create" %}/',

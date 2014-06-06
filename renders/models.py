@@ -8,6 +8,7 @@ class Renders(models.Model):
     start_date = models.DateTimeField('Data stworzenia', auto_now_add=True)
     end_date = models.DateTimeField('Data zakończenia', null=True)
     script = models.TextField(verbose_name='Skrypt sceny')
+    status = models.CharField(max_length=30)
 
     class Meta:
         verbose_name = "Render"

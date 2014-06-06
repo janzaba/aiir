@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -24,7 +26,6 @@ def index(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/register')
     else:
-        #return render_to_response('main.html',{},context_instance=RequestContext(request))
         return HttpResponseRedirect('/render')
 
 ################################  REGISTER ###################################################################################################################################
@@ -40,6 +41,8 @@ def register(request):
                         user.first_name = form.cleaned_data['name']
                         user.is_staff = False
                         user.save()
+                        # CREATING FOLDER FORM USER RENDERS
+                        os.mkdir(os.path.join('/home/aiir/POVRay/static/users/', str(user.id)))
                         return HttpResponseRedirect('/login')
                     except Exception as e:
                         formErrors.append("Podany adres email istnieje już w naszej bazie danych");
@@ -72,6 +75,13 @@ def loginPage(request):
     else:
         f = LoginForm()
         return render_to_response('login.html',{'form': f, 'menu':'login'},context_instance=RequestContext(request))
+
+
+################################  ACCOUNT ###################################################################################################################################
+def account(request):
+    return render_to_response('account.html',context_instance=RequestContext(request))
+
+
 
 ################################  LOGOUT ###################################################################################################################################
 def logoutPage(request):
